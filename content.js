@@ -1,4 +1,4 @@
-document.addEventListener("submit", function (event) {
+document.addEventListener("toggle", function (event) {
     const inputs = document.querySelectorAll("input, textarea");
     inputs.forEach((input) => {
       if (isSQLInjection(input.value)) {
@@ -20,4 +20,5 @@ document.addEventListener("submit", function (event) {
     ];
     return sqlPatterns.some((pattern) => input.includes(pattern));
   }
-  
+
+
