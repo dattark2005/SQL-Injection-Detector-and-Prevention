@@ -7,18 +7,5 @@ document.addEventListener("toggle", function (event) {
       }
     });
   });
-  
-  function isSQLInjection(input) {
-    const sqlPatterns = [
-      "' OR '1'='1",
-      "' OR 1=1 --",
-      "SELECT * FROM",
-      "DROP TABLE",
-      "UNION SELECT",
-      "INSERT INTO",
-      "'; --"
-    ];
-    return sqlPatterns.some((pattern) => input.includes(pattern));
-  }
 
 

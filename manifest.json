@@ -6,7 +6,11 @@
     "permissions": [
       "declarativeNetRequest",
       "activeTab",
-      "tabs"
+      "tabs",
+      "activeTab",
+      "storage",
+      "notifications",
+      "scripting"
     ],
     "host_permissions": ["<all_urls>"],
     "declarative_net_request": {

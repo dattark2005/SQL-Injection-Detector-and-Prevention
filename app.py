@@ -14,9 +14,12 @@ def getURL():
 
         url = data
 
+        print(data)
+
         return jsonify({ 
             "sucess": True, 
-            "data": url
+            "data": url,
+            "threat": True
         })
     except: 
         return jsonify({ 
