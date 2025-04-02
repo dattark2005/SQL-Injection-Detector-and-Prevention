@@ -5,6 +5,8 @@
     "description": "Detects and prevents SQL injection attacks in the active tab",
     "permissions": [
       "declarativeNetRequest",
+      "webRequest",
+      "webRequestBlocking",
       "activeTab",
       "tabs",
       "activeTab",

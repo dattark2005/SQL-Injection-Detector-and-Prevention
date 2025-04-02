@@ -6,6 +6,4 @@ document.addEventListener("toggle", function (event) {
         event.preventDefault(); // Stop form submission
       }
     });
-  });
-
-
+});

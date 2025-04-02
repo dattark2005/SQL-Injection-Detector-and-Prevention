@@ -9,6 +9,7 @@ function extLog(message, data = null) {
   }
 }
 
+
 chrome.runtime.onInstalled.addListener(() => {
     extLog("Extension installed");
     
@@ -68,6 +69,8 @@ async function checkUrl(url, tabId) {
         
         const result = await response.json();
         extLog("Received response from server:", result);
+
+        console.log(result)
         
         if (result.threat) {
             extLog(`THREAT DETECTED at ${url}`, result);
@@ -82,7 +85,9 @@ async function checkUrl(url, tabId) {
             
             chrome.scripting.executeScript({
                 target: { tabId: tabId },
-                function: showWarningBanner,
+                function: () => { 
+                    window.location.href = chrome.runtime.getURL("warning.html");
+                },
                 args: [result.details || "Potential SQL injection vulnerability detected"]
             });
         }
@@ -100,35 +105,3 @@ async function checkUrl(url, tabId) {
     }
 }
 
-function showWarningBanner(message) {
-    const banner = document.createElement('div');
-    banner.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background-color: #ff4d4d;
-        color: white;
-        padding: 10px;
-        text-align: center;
-        font-weight: bold;
-        z-index: 9999;
-    `;
-    banner.textContent = message;
-    
-    
-    const closeBtn = document.createElement('span');
-    closeBtn.innerHTML = '&times;';
-    closeBtn.style.cssText = `
-        float: right;
-        cursor: pointer;
-        margin-right: 20px;
-        font-size: 20px;
-    `;
-    closeBtn.onclick = function() {
-        document.body.removeChild(banner);
-    };
-    
-    banner.appendChild(closeBtn);
-    document.body.prepend(banner);
-}
